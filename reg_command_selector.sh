@@ -5,13 +5,9 @@ containsElement () {
 }
 
 reg_select_args () {
-  count_of_params=$#;
-  # echo $count_of_params;
-  #echo $#;
-  #-s 0,1,2,5,6 "pull" "git pull origin master" "vagrant provision" "gulp build" "gulp serve"
-  
+
   IFS=$COMMAND_SEPRATOR read -r -a args <<< "$2";
-  # echo "${args[@]}";
+
   output=();
   index=("$@");
 

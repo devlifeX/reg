@@ -3,9 +3,10 @@ reg_save () {
   if [[ $is_exist = "true" ]]; then
       echo -e "$RED The command '$BS$2$BF$RED' is exist please pick another name";
     else
-      echo  "$@" >> "reg.cmd";  
+      output_for_save=$(reg_select_args -s 0,1,2 "$@"); 
+      echo  $output_for_save >> "reg.cmd";  
       echo -e "$GREEN The command '$BS$2$BF$GREEN' saved.";
       echo -e "now you can use $BS$2$BF$GREEN command for run below command";
-      echo -e "$BS$@$BF";
+      echo -e "$BS$output_for_save$BF";
   fi
 }

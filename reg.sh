@@ -6,8 +6,8 @@
 
 
 reg () {
-  reg_select_args "$@"; 
-  #reg_command $@;
+  # reg_select_args "$@"; 
+  reg_command "$@";
 
   exit;
 
@@ -37,7 +37,7 @@ reg () {
 # reg "push" "git psuh origin master"
 # reg "log" "git log --oneline"
 # reg "s" "git status" "git log -p"
-# reg add "down" "vagrant halt"
+reg add "down" "vagrant halt"
 
 # reg -s 0,1,2,5,6 "pull" "git pull origin master" "vagrant provision" "gulp build" "gulp serve"
-reg -s 5,3 "pull" "git pull origin master" "vagrant provision" "gulp build" "gulp serve"
+# reg -s 5,3 "pull" "git pull origin master" "vagrant provision" "gulp build" "gulp serve"
