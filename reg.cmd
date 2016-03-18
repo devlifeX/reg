@@ -3,3 +3,4 @@ push git psuh origin master
 log git log --oneline
 s git status git log -p
 up vagrant up
+add down vagrant halt
