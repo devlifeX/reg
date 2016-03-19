@@ -14,16 +14,3 @@ reg () {
   reg_command "$@";
   return;
 }
-
-
-
-reg -h
-# reg "pull" "git pull origin master" "vagrant provision" "gulp build" "gulp serve"
-# reg "push" "git psuh origin master"
-# reg "log" "git log --oneline"
-# reg "s" "git status" "git log -p"
-# reg add "ls" "ls -la" "pwd"
-# reg remove "ls"
-# reg ls;
-# reg -s 0,1,2,5,6 "pull" "git pull origin master" "vagrant provision" "gulp build" "gulp serve"
-# reg -s 5,3 "pull" "git pull origin master" "vagrant provision" "gulp build" "gulp serve"
