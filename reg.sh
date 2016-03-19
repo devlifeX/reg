@@ -1,13 +1,14 @@
 #!/bin/bash
+  REG_CURRENT_PATH=$(pwd);
 
-. inc/reg_var.sh
-. inc/reg_common.sh
-. inc/reg_command_selector.sh
-. inc/reg_man.sh
-. inc/reg_load.sh
-. inc/reg_save.sh
-. inc/reg_remove.sh
-. inc/reg_exe.sh
+. $REG_CURRENT_PATH/inc/reg_var.sh
+. $REG_CURRENT_PATH/inc/reg_common.sh
+. $REG_CURRENT_PATH/inc/reg_command_selector.sh
+. $REG_CURRENT_PATH/inc/reg_man.sh
+. $REG_CURRENT_PATH/inc/reg_load.sh
+. $REG_CURRENT_PATH/inc/reg_save.sh
+. $REG_CURRENT_PATH/inc/reg_remove.sh
+. $REG_CURRENT_PATH/inc/reg_exe.sh
 
 reg () {
   reg_command "$@";
@@ -16,7 +17,7 @@ reg () {
 
 
 
-# reg -h
+reg -h
 # reg "pull" "git pull origin master" "vagrant provision" "gulp build" "gulp serve"
 # reg "push" "git psuh origin master"
 # reg "log" "git log --oneline"
