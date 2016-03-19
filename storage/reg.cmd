@@ -1,1 +1,0 @@
-ls; ls -la; pwd

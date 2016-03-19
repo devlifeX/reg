@@ -3,7 +3,7 @@ reg_execute () {
   is_exist=$(reg_is_command_exist $1);
   if [[ $is_exist = "false" ]]; then
     print "There is no command (%bs)$1(%bf)" $RED 
-    exit;
+    return; 
   fi
 
   cmd=$(reg_get_cmd_by_name $1);

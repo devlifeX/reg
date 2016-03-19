@@ -9,10 +9,11 @@
 . inc/reg_remove.sh
 . inc/reg_exe.sh
 
-
 reg () {
   reg_command "$@";
+  return;
 }
+
 
 
 # reg -h

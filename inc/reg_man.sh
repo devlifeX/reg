@@ -9,7 +9,6 @@ reg_man () {
     print "\t Description"
     print "(%bs)  \n OPTIONS (%bf)"
     print "\t Options"
-
-    exit;
   fi
+  return;
 }
