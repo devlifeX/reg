@@ -27,7 +27,7 @@ reg_is_command_exist () {
   while IFS='' read -r line || [[ -n "$line" ]]; do
     sep=' ' read -ra ADDR <<< "$line"
     for i in "${ADDR[@]}"; do
-      if [[ $i = $1 ]]; then
+      if [[ $i = "$1$SEPRATOR_FOR_SAVE" ]]; then
         echo "true";
         exit;
       fi
@@ -43,7 +43,7 @@ reg_get_cmd_by_name () {
   while IFS='' read -r line || [[ -n "$line" ]]; do
     sep=' ' read -ra ADDR <<< "$line"
     for i in "${ADDR[@]}"; do
-      if [[ $i = $1 ]]; then
+      if [[ $i = "$1$SEPRATOR_FOR_SAVE" ]]; then
         echo $line;
         exit;
       fi
