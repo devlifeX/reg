@@ -6,28 +6,13 @@ reg_execute () {
     exit;
   fi
 
-cmd=$(reg_get_cmd_by_name $1);
+  cmd=$(reg_get_cmd_by_name $1);
+  IFS=$SEPRATOR_FOR_SAVE read -r -a args <<< "$cmd";
 
-
-
-  counter=0;
-  for word in "$cmd"; do
-    echo $word;
-    counter=$[$counter +1];
+  for arg in "${args[@]:1}"; do
+    cmd_genrator="$cmd_genrator && $arg";
   done
-
-
-    # if [[ $counter -gt 0 ]]; then
-    #   exe_args="$exe_args && $word";
-    #   cmd_args="$cmd_args,  \033[1m \$$counter='$word'\033[0m";
-    # else
-    #   Function_name="$word";
-    # fi
-  # exe_args=${exe_args:3:${#exe_args}}
-# echo exe_args;
-
-  #echo -e "$cmd_args";
-  #echo  "$Function_name () { $exe_args }";
-  #echo ${exe_args:3:${#exe_args}};
-
+  cmd=${cmd_genrator:3:${#cmd_genrator}};
+  cmd="$cmd;";
+  eval $cmd;
 }
