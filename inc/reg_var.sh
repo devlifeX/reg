@@ -1,4 +1,4 @@
-FILE_NAME="reg.cmd";
+FILE_NAME="storage/reg.cmd";
 FILE_SEPRATOR=",";
 COMMAND_SEPRATOR=",";
 

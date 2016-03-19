@@ -44,7 +44,7 @@ reg_command () {
   fi
 
   if [[ $1 == "remove" ]]; then
-    echo "remove";
+    reg_remove "$@"
     return;
   fi
 
@@ -58,5 +58,5 @@ reg_command () {
     return;
   fi
 
-
+  reg_execute $1;
 }
