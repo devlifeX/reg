@@ -31,8 +31,20 @@ for show alias
 for call alias:
 
     reg [alias name]
+
 or
+
     reg [alias name] [-s / -t] [command 1] [command 2] [command n]
+
+you can use alias standalone.
+
+for add alias as standalone (not recommended)
+
+    reg alias [alias name] [alias value]
+
+for remove alias as standalone (not recommended)
+
+    reg alias -d [alias name]
 
 for add env variable
 
