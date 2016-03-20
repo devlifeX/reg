@@ -26,13 +26,17 @@ for remove alias:
 
 for show alias
 
-    reg list [alias] [-num]
+    reg list [alias name] [-num]
 
 for call alias:
 
-    reg [alias]
+    reg [alias name]
 or
-    reg [alias] [-s / -e] [command 1] [command 2] [command n]
+    reg [alias name] [-s / -e] [command 1] [command 2] [command n]
+
+for reload bashrc
+
+    reg reload    
 
 
 **reg** has group alias, it means you can put many command as single alias name.
