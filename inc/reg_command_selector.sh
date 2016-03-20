@@ -93,6 +93,11 @@ reg_command () {
     return;
   fi
 
+  if [[ $1 == "env" ]]; then
+    reg_env "$@";
+    return;
+  fi
+
   if [[ $1 == "reload" ]]; then
     reg_reload;
     return;
