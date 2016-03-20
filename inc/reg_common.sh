@@ -53,3 +53,22 @@ reg_get_cmd_by_name () {
 
   echo ""
 }
+
+reg_get_all_cmd () {
+  FILE_CONTENT="";
+  while IFS='' read -r line || [[ -n "$line" ]]; do
+    sep=' ' read -ra ADDR <<< "$line"
+    output="$output \\n $line";
+  done < "$FILE_NAME"
+  echo $output;
+}
+
+reg_set_number_cmd () {
+  IFS=$SEPRATOR_FOR_SAVE read -r -a args <<< "$@";
+  counter=1;
+  for i in "${args[@]:1}"; do
+  output="$output $RED\$$counter:$BF $i";
+    counter=$[counter+1];
+  done
+  echo $output;
+}

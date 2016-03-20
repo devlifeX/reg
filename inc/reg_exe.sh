@@ -16,3 +16,16 @@ reg_execute () {
   cmd="$cmd;";
   eval $cmd;
 }
+
+reg_show_list () {
+  if [[ $2 ]]; then
+    item=$(reg_get_cmd_by_name $2);
+    if [[ $3 == "-num" ]]; then
+      item=$(reg_set_number_cmd $item);
+    fi
+    echo -e $item;
+  else
+   all=$(reg_get_all_cmd);
+   echo -e $all;
+ fi
+}

@@ -88,8 +88,18 @@ reg_command () {
     return;
   fi
 
+  if [[ $1 == "list" ]]; then
+    reg_show_list "$@";
+    return;
+  fi
+
   if [[ $1 == "-h" ]]; then
     reg_man $1;
+    return;
+  fi
+
+  if [[ $1 == "-v" ]]; then
+    reg_version;
     return;
   fi
 

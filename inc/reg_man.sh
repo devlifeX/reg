@@ -12,3 +12,13 @@ reg_man () {
   fi
   return;
 }
+
+reg_version () {
+  print "\n";
+  print "\t '(%bs)Reg(%bf)' version: $GREEN $REG_VERSION (%bf)";
+  print "\t This version released under Apache License";
+  print "\t Version 2.0, January 2004";
+  print "\t Repo:";
+  print "\t https://github.com/devlifeX/reg";
+  print "\n";
+}
