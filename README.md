@@ -32,7 +32,15 @@ for call alias:
 
     reg [alias name]
 or
-    reg [alias name] [-s / -e] [command 1] [command 2] [command n]
+    reg [alias name] [-s / -t] [command 1] [command 2] [command n]
+
+for add env variable
+
+    reg env [env name] [env value]
+
+for remove env variable
+
+    reg env -d [env name]
 
 for reload bashrc
 
