@@ -18,15 +18,22 @@ you can use **reg** like this:
 
 for add alias you can use this command:
 
-    reg add [alias name]
+    reg add [alias name] [command 1] [command 2] [command n]
 
 for remove alias:
 
     reg remove [alias name]
 
+for show alias
+
+    reg list [alias] [-num]
+
 for call alias:
 
     reg [alias]
+or
+    reg [alias] [-s / -e] [command 1] [command 2] [command n]
+
 
 **reg** has group alias, it means you can put many command as single alias name.
 
