@@ -72,3 +72,8 @@ reg_set_number_cmd () {
   done
   echo $output;
 }
+
+reg_reload () {
+  exec bash;
+  return;
+}

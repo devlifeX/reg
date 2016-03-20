@@ -93,6 +93,11 @@ reg_command () {
     return;
   fi
 
+  if [[ $1 == "reload" ]]; then
+    reg_reload;
+    return;
+  fi
+
   if [[ $1 == "-h" ]]; then
     reg_man $1;
     return;
