@@ -9,6 +9,8 @@
 . "$REG_CURRENT_PATH/inc/reg_save.sh"
 . "$REG_CURRENT_PATH/inc/reg_remove.sh"
 . "$REG_CURRENT_PATH/inc/reg_exe.sh"
+. "$REG_CURRENT_PATH/inc/reg_alias.sh"
+. "$REG_CURRENT_PATH/inc/reg_env.sh"
 
 reg () {
   reg_command "$@";
