@@ -1,10 +1,10 @@
 reg_remove () {
-  is_exist=$(reg_is_command_exist $2);
-  if [[ $is_exist != "true" ]]; then
-       print "The command '(%bs)$2(%bf)' is not exist." $RED
-    else
-      line_of_cmd=$(reg_get_cmd_by_name $2);
-      sed --in-place "/$line_of_cmd/d" $FILE_NAME;
-      print "The command '(%bs)$2(%bf)' removed." $GREEN
-  fi
+  [[ $# == 2 ]] || { reg_error 'Usage: reg remove NAME'; return 1; }
+  reg_valid_name "$2" || return 1
+  local reg_record reg_prefix
+  reg_record=$(reg_get_cmd_by_name "$2") || { reg_error "No such command: $2"; return 1; }
+  reg_prefix="$2;"
+  [[ $reg_record != "$REG_RECORD_PREFIX"* ]] || reg_prefix="$REG_RECORD_PREFIX$reg_prefix"
+  reg_update_file "$REG_FILE_NAME" "$reg_prefix" || return 1
+  reg_print "Command (%bs)$2(%bf) removed." "$REG_GREEN"
 }

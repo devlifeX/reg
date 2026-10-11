@@ -1,27 +1,22 @@
 reg_alias () {
-   if [[ $2 == "-d" ]] && [[ $3 ]]; then
-   reg_alias_remove $@;
-   return;
- fi
-
- if [[ $2 ]] && [[ $3 ]]; then
-   reg_alias_add $@;
-   return;
- fi
-
- echo "not found";
+  [[ $# == 3 ]] || { reg_error 'Usage: reg alias NAME VALUE | reg alias -d NAME'; return 1; }
+  if [[ $2 == -d ]]; then
+    reg_valid_name "$3" || return 1
+    reg_alias_remove "$@"
+  else
+    reg_valid_name "$2" || return 1
+    reg_alias_add "$@"
+  fi
 }
 
 reg_alias_add () {
-  cmd="alias $2=\"${@:3}\"";
-  echo $cmd >> ~/.bashrc;
-  print "Save (%bs)$2(%bf) successfull. you can use 'alias \$$2' to run your alias" $GREEN;
-  reg_reload;
+  reg_update_bashrc "alias $2=" "$(printf 'alias %s=%q' "$2" "$3")" || return 1
+  alias -- "$2=$3" || return 1
+  reg_print "Alias (%bs)$2(%bf) saved." "$REG_GREEN"
 }
 
 reg_alias_remove () {
-  sed --in-place "/alias $3=/d" ~/.bashrc;
-  print "Remove (%bs)$3(%bf) successfull." $GREEN;
-  reg_reload;
+  reg_update_bashrc "alias $3=" || return 1
+  unalias -- "$3" 2>/dev/null || :
+  reg_print "Alias (%bs)$3(%bf) removed." "$REG_GREEN"
 }
-

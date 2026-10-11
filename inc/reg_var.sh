@@ -1,11 +1,8 @@
-REG_VERSION="1.0.0";
-FILE_NAME="$REG_CURRENT_PATH/storage/reg.cmd";
-FILE_SEPRATOR=",";
-COMMAND_SEPRATOR=",";
-SEPRATOR_FOR_SAVE=";";
+REG_VERSION="1.0.1"
+REG_FILE_NAME="$REG_CURRENT_PATH/storage/reg.cmd"
+REG_RECORD_PREFIX=$'@reg-v2\t'
 
-#color
-BS="\033[1m";
-BF="\033[0m";
-RED="\e[31m";
-GREEN="\e[32m";
+REG_BS=$'\033[1m'
+REG_BF=$'\033[0m'
+REG_RED=$'\033[31m'
+REG_GREEN=$'\033[32m'

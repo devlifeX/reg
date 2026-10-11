@@ -1,82 +1,92 @@
-Reg is simple tool for bash alias management
+# Reg
 
-- [INSTALLATION](#installation)
-- [DESCRIPTION](#description)
-- [OPTIONS](#options)
+Reg is a small Bash tool for persistent aliases and named command groups.
+Each group runs in your current shell, in order, and stops when a step fails.
 
+## Installation
 
-# INSTALLATION
-to install reg manually you can pull or download zip file and run installer.sh by this command
+From a downloaded or cloned checkout:
 
-    bash installer.sh
+```bash
+bash installer.sh
+source "$HOME/.local/share/reg/reg.sh"
+```
 
-# DESCRIPTION
-**reg** is a small command-line bash program alias management. it requires the bash interpreter (almost unix os have it already).
-you can use **reg** like this:
+The installer uses the local checkout, requires no `sudo` or download, and
+installs privately in `~/.local/share/reg`. It adds the source line to `.bashrc`
+for future Bash sessions. Reinstallation preserves saved commands; a failed
+installation restores the previous directory. On the first upgrade from the
+original `/usr/local/bin/reg/reg-master` installation, its command file is copied
+if present. The old directory is left intact.
 
-    reg add "pull" "git pull origin master" "vagrant provision" "gulp build"
+To use a checkout directly, source its `reg.sh` using its full path.
 
-for add alias you can use this command:
+## Command groups
 
-    reg add [alias name] [command 1] [command 2] [command n]
+Quote each step as a separate argument:
 
-for remove alias:
+```bash
+reg add pull "git pull origin master" "vagrant provision" "gulp build"
+reg pull
+reg list
+reg list pull
+reg list pull -num
+reg remove pull
+```
 
-    reg remove [alias name]
+Names use letters, digits, underscores, dots and hyphens, and start with a letter,
+digit or underscore. Built-in names (`add`, `remove`, `list`, `alias`, `env`,
+`reload`, `man`) are reserved. Empty steps and duplicate names are rejected.
+Failures return a nonzero status.
 
-for show alias
+Step numbers start at 1. Skip selected steps with `-s`, or run only selected
+steps with `-t`; execution always follows the group's original order:
 
-    reg list [alias name] [-num]
+```bash
+reg pull -s "2,3"  # only git pull
+reg pull -t "2,3"  # only provision and build
+```
 
-for call alias:
+Commands are shell code: pipes, quotes, wildcards and semicolons work normally.
+They are preserved during registration and evaluated only when the group runs.
+Changes such as `cd` or `export` affect the current shell. Save only commands
+you intend to execute.
 
-    reg [alias name]
+## Shell aliases and environment variables
 
-or
+```bash
+reg alias gc 'git commit -m'
+reg alias -d gc
+reg env GREETING 'hello world'
+reg env -d GREETING
+reg reload
+```
 
-    reg [alias name] [-s / -t] [command 1] [command 2] [command n]
+Alias and environment changes update `.bashrc` and the current shell without
+restarting it. Values are saved literally, including spaces and quotes. Variable
+names follow Bash's identifier rules. `reg reload` sources `.bashrc` explicitly.
 
-you can use alias standalone.
+## Storage
 
-for add alias as standalone (not recommended)
+Commands live in `storage/reg.cmd` beside `reg.sh`. New records use a version
+marker and escape backslashes, semicolons and newlines so steps round-trip
+without changing their text. Original records remain readable and removable;
+the old Reg version cannot read new records. Text already altered by an old
+registration cannot be recovered automatically.
 
-    reg alias [alias name] [alias value]
+File updates use a temporary file and rename, preserving the original if the
+write fails. Run modifying commands and the installer one at a time; concurrent
+writes are not supported.
 
-for remove alias as standalone (not recommended)
+## Tests
 
-    reg alias -d [alias name]
+Tests require Python 3, Bash and standard Unix tools; no Python packages are
+needed. They run commands and installations in temporary checkouts and homes.
 
-for add env variable
+```bash
+python3 -m unittest discover -s tests -v
+```
 
-    reg env [env name] [env value]
+## License
 
-for remove env variable
-
-    reg env -d [env name]
-
-for reload bashrc
-
-    reg reload    
-
-
-**reg** has group alias, it means you can put many command as single alias name.
-
-for example you can define this alias group
-
-    reg add "pull" "git pull origin master" "vagrant provision" "gulp build"
-
-and you can use like this:
-
-    reg "pull"
-
-or you can select specific command from alias group for example:
-
-    reg "pull" -s "2,3"
-
-it's mean you only run first command in this example it is 
-    
-    "git pull origin master"
-
-you skiped command 2 and 3
-
-this documentation will complete in future
+Apache License 2.0. See [LICENSE](LICENSE).
